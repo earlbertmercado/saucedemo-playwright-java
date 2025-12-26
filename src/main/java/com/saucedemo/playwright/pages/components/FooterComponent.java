@@ -26,32 +26,43 @@ public class FooterComponent extends BasePage {
 
     // ------------------ Visibility Methods ------------------
     public boolean isTwitterLinkVisible() {
-        return twitterLink.isVisible();
+        boolean isVisible = twitterLink.isVisible();
+        logger.debug("Footer: Twitter link visibility = {}", isVisible);
+        return isVisible;
     }
 
     public boolean isFacebookLinkVisible() {
-        return facebookLink.isVisible();
+        boolean isVisible = facebookLink.isVisible();
+        logger.debug("Footer: Facebook link visibility = {}", isVisible);
+        return isVisible;
     }
 
     public boolean isLinkedinLinkVisible() {
-        return linkedinLink.isVisible();
+        boolean isVisible = linkedinLink.isVisible();
+        logger.debug("Footer: LinkedIn link visibility = {}", isVisible);
+        return isVisible;
     }
 
     // ------------------ Getter Methods ------------------
     public String getFooterCopyrightText() {
-        return footerCopyright.innerText();
+        String text = footerCopyright.innerText();
+        logger.debug("Footer: Retrieved copyright text: '{}'", text);
+        return text;
     }
 
     // ------------------ Action Methods ------------------
     public void clickTwitterLink() {
+        logger.info("Footer: Clicking Twitter social media link.");
         twitterLink.click();
     }
 
     public void clickFacebookLink() {
+        logger.info("Footer: Clicking Facebook social media link.");
         facebookLink.click();
     }
 
     public void clickLinkedinLink() {
+        logger.info("Footer: Clicking LinkedIn social media link.");
         linkedinLink.click();
     }
 }

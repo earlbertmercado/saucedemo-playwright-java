@@ -53,26 +53,41 @@ public class CheckoutStepOnePage extends BasePage {
 
     // ------------------ Action / Input Methods ------------------
     public CheckoutStepOnePage enterFirstName(String firstName) {
+        logger.debug("Entering first name: {}", firstName);
         firstNameInput.fill(firstName);
         return this;
     }
 
     public CheckoutStepOnePage enterLastName(String lastName) {
+        logger.debug("Entering last name: {}", lastName);
         lastNameInput.fill(lastName);
         return this;
     }
 
     public CheckoutStepOnePage enterPostalCode(String postalCode) {
+        logger.debug("Entering postal code: {}", postalCode);
         postalCodeInput.fill(postalCode);
         return this;
     }
 
+    //TODO: use this method to fill all customer information at once in test
+//    public CheckoutStepOnePage fillCustomerInfo(String fName,
+//                                                       String lName,
+//                                                       String zip) {
+//        logger.info("Filling customer information: {} {}, {}", fName, lName, zip);
+//        return enterFirstName(fName)
+//                .enterLastName(lName)
+//                .enterPostalCode(zip);
+//    }
+
     public CheckoutStepTwoPage clickContinueButton() {
+        logger.info("Clicking 'Continue' button to proceed to Step Two.");
         continueButton.click();
         return new CheckoutStepTwoPage(page);
     }
 
     public CartPage clickCancelButton() {
+        logger.info("Clicking 'Cancel' button. Returning to Cart.");
         cancelButton.click();
         return new CartPage(page);
     }

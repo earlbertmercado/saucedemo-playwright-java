@@ -37,15 +37,19 @@ public class CartPage extends BasePage {
     }
 
     public int getCartItemCount() {
-        return cartItems.count();
+        int count = cartItems.count();
+        logger.debug("Cart item count retrieved: {}", count);
+        return count;
     }
 
     public int getTotalQuantity() {
+        logger.debug("Calculating total quantity for all items in cart...");
         int totalQuantity = 0;
         for (int i = 0; i < itemQuantities.count(); i++) {
             String quantityText = itemQuantities.nth(i).innerText();
             totalQuantity += Integer.parseInt(quantityText);
         }
+        logger.info("Total quantity in cart: {}", totalQuantity);
         return totalQuantity;
     }
 
@@ -60,7 +64,9 @@ public class CartPage extends BasePage {
 
     // ------------------ Validation Methods ------------------
     public boolean areAllItemDetailsValid() {
+        logger.info("Validating details for all items in the cart.");
         for (int i = 0; i < cartItems.count(); i++) {
+            logger.error("Validation failed for item at index: {}", i);
             if (!isValidItem(i)) return false;
         }
         return true;
@@ -68,26 +74,37 @@ public class CartPage extends BasePage {
 
     public boolean isValidItem(int index) {
         String name = itemNames.nth(index).innerText();
-        String description = itemDescriptions.nth(index).innerText();
         String priceText = itemPrices.nth(index).innerText().replace("$", "");
 
-        if (name.isEmpty() || description.isEmpty()) return false;
+        logger.debug("Checking item at index {}: [Name: {}, Price: {}]", index, name, priceText);
 
-        // Returns true if priceText is a valid numeric value (integer or decimal)
-        return priceText.matches("\\d+(\\.\\d+)?");
+        if (name.isEmpty()) {
+            logger.warn("Item at index {} has an empty name.", index);
+            return false;
+        }
+
+        boolean isPriceValid = priceText.matches("\\d+(\\.\\d+)?");
+        if (!isPriceValid) {
+            logger.warn("Item '{}' has an invalid price format: {}", name, priceText);
+        }
+
+        return isPriceValid;
     }
 
     // ------------------ Action Methods ------------------
     public void removeItemByIndex(int index) {
+        logger.info("Removing item at index {} from cart.", index);
         removeButtons.nth(index).click();
     }
 
     public InventoryPage clickContinueShopping() {
+        logger.info("Clicking 'Continue Shopping' button.");
         continueShoppingButton.click();
         return new InventoryPage(page);
     }
 
     public CheckoutStepOnePage clickCheckout() {
+        logger.info("Clicking 'Checkout' button.");
         checkoutButton.click();
         return new CheckoutStepOnePage(page);
     }

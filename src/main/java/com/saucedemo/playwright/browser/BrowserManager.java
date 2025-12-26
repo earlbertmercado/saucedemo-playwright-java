@@ -44,7 +44,7 @@ public class BrowserManager {
         Integer height = parseDimension(props.getProperty("browserHeight"), "height");
 
         BrowserTypes browserType = BrowserTypes.fromString(browserNameRaw);
-        logger.info("Starting [{}] - {}", browserType, headless ? "headless" : "headed");
+        logger.info("Starting {} browser with {} mode", browserType, headless ? "headless" : "headed");
 
         // Create Playwright instance for this thread
         tlPlaywright.set(Playwright.create());
@@ -60,13 +60,13 @@ public class BrowserManager {
         tlPage.set(page);
         tlFactory.set(this);
 
-        logger.info("Started [{}]", browserType);
+        logger.info("Started {} browser", browserType);
         return page;
     }
 
     // Close browser, context, and Playwright instance, with cleanup
     public void closeBrowser() {
-        logger.info("Closing browser...");
+        logger.info("Closing browser.");
 
         try {
             if (tlBrowserContext.get() != null) {
@@ -91,9 +91,9 @@ public class BrowserManager {
     private Integer parseDimension(String value, String type) {
         if (value != null && !value.trim().isEmpty()) {
             try {
-                int dim = Integer.parseInt(value.trim());
-                logger.debug("{}: {}", type, dim);
-                return dim;
+//                int dim = Integer.parseInt(value.trim());
+//                logger.info("{}: {}", type, dim);
+                return Integer.parseInt(value.trim());
             } catch (NumberFormatException e) {
                 logger.warn("Invalid {} '{}'", type, value);
             }

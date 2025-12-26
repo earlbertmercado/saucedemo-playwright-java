@@ -27,6 +27,7 @@ public class CartTest extends BaseTest {
                 .addItemToCartByIndex(FIRST_ITEM)
                 .clickShoppingCart();
 
+        logger.info("Verifying Cart Page URL and primary UI components.");
         assertThat(page.url())
                 .as("Cart page URL")
                 .isEqualTo(AppConstants.CART_URL);
@@ -98,9 +99,10 @@ public class CartTest extends BaseTest {
                 .addItemToCartByIndex(THIRD_ITEM)
                 .clickShoppingCart();
 
+        logger.info("Validating cart item count and total quantity.");
         softly.assertThat(cartPage.getCartItemCount())
                 .as("Number of items in cart")
-                .isEqualTo(3);
+                .isEqualTo(EXPECTED_TOTAL_QUANTITY);
 
         softly.assertThat(cartPage.getTotalQuantity())
                 .as("Total quantity of items in cart")
@@ -127,8 +129,10 @@ public class CartTest extends BaseTest {
                 .as("Number of items in cart before removal")
                 .isEqualTo(1);
 
+        logger.debug("Current cart count: {}. Removing item...", cartPage.getCartItemCount());
         cartPage.removeItemByIndex(FIRST_ITEM);
 
+        logger.info("Verifying cart is empty after removal.");
         softly.assertThat(cartPage.getCartItemCount())
                 .as("Number of items in cart after removal")
                 .isEqualTo(0);
@@ -174,6 +178,7 @@ public class CartTest extends BaseTest {
                 .login(user.getUsername(), user.getPassword())
                 .clickShoppingCart();
 
+        logger.info("Verifying behavior of an empty cart and header badge.");
         softly.assertThat(cartPage.getCartItemCount())
                 .as("Number of items in empty cart")
                 .isEqualTo(0);

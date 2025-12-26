@@ -23,6 +23,8 @@ public class FooterComponentTest extends BaseTest {
                 .navigate()
                 .login(user.getUsername(), user.getPassword());
 
+        logger.info("Verifying all social media links and copyright visibility.");
+
         softly.assertThat(footer.isTwitterLinkVisible())
                 .as("Twitter link visibility")
                 .isTrue();
@@ -57,6 +59,8 @@ public class FooterComponentTest extends BaseTest {
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword());
+
+        logger.info("Verifying all social media links");
 
         // Validate Twitter link
         Page twitterTab = page.waitForPopup(footer::clickTwitterLink);

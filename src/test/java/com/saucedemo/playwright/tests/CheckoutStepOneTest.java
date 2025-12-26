@@ -28,6 +28,7 @@ public class CheckoutStepOneTest extends BaseTest {
                 .clickShoppingCart()
                 .clickCheckout();
 
+        logger.info("Verifying checkout form visibility and URL.");
         assertThat(page.url())
                 .as("Checkout Step One page URL")
                 .isEqualTo(AppConstants.CHECKOUT_STEP_ONE_URL);
@@ -93,6 +94,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
+        logger.debug("Submitting checkout form with missing First Name...");
         new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
@@ -107,6 +109,7 @@ public class CheckoutStepOneTest extends BaseTest {
                 .locator(CheckoutStepOnePageLocators.ERROR_MESSAGE)
                 .textContent()
                 .trim();
+        logger.info("Captured error when missing first name: '{}'", actualErrorMessage);
 
         assertThat(actualErrorMessage)
                 .as("Error message for empty First Name")
@@ -122,6 +125,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
+        logger.debug("Submitting checkout form with missing Last Name...");
         new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
@@ -136,6 +140,7 @@ public class CheckoutStepOneTest extends BaseTest {
                 .locator(CheckoutStepOnePageLocators.ERROR_MESSAGE)
                 .textContent()
                 .trim();
+        logger.info("Captured error when missing last name: '{}'", actualErrorMessage);
 
         assertThat(actualErrorMessage)
                 .as("Error message for empty Last Name")
@@ -151,6 +156,7 @@ public class CheckoutStepOneTest extends BaseTest {
 
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
+        logger.debug("Submitting checkout form with missing postal code...");
         new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
@@ -166,6 +172,7 @@ public class CheckoutStepOneTest extends BaseTest {
                 .textContent()
                 .trim();
 
+        logger.info("Captured error when missing postal code: '{}'", actualErrorMessage);
         assertThat(actualErrorMessage)
                 .as("Error message for empty Postal Code")
                 .isEqualTo(EXPECTED_ERROR_MESSAGE);

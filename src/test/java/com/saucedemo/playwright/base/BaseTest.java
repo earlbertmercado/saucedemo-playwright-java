@@ -8,7 +8,6 @@ import com.microsoft.playwright.Page;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
@@ -46,21 +45,7 @@ public abstract class BaseTest {
         if (user == null) {
             throw new RuntimeException("Test user not found: " + userKey);
         }
-        logger.info("Loaded test user: {}", userKey);
-    }
-
-    protected TestDataUsers getTestUser() {
-        return user;
-    }
-
-    // Logs the current URL after each test method.
-    @AfterMethod
-    public void logCurrentUrl() {
-        if (page != null) {
-            logger.info("Current URL: {}", page.url());
-        } else {
-            logger.warn("Page is not initialized, cannot display URL.");
-        }
+        logger.info("Loaded user test data: {}", userKey);
     }
 
     //  Closes the browser and cleans up resources after all tests in the class have executed.

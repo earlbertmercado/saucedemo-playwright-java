@@ -28,7 +28,13 @@ public class CheckoutCompletePage extends BasePage {
 
     // ------------------ Visibility Methods ------------------
     public boolean isThankYouHeaderVisible() {
-        return thankYouHeader.isVisible();
+        boolean isVisible = thankYouHeader.isVisible();
+        if (isVisible) {
+            logger.info("Order completion confirmed: 'Thank You' header is visible.");
+        } else {
+            logger.warn("Checkout might not be complete: 'Thank You' header is NOT visible.");
+        }
+        return isVisible;
     }
 
     public boolean isThankYouMessageVisible() {
@@ -41,6 +47,7 @@ public class CheckoutCompletePage extends BasePage {
 
     // ------------------ Action Methods ------------------
     public InventoryPage clickBackHomeButton() {
+        logger.info("Clicking 'Back Home' button to return to products.");
         backHomeButton.click();
         return new InventoryPage(page);
     }

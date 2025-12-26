@@ -15,8 +15,12 @@ public class LoginTest extends BaseTest {
     @Test
     public void testLoginPageLoad() {
         SoftAssertions softly = new SoftAssertions();
+
+        logger.debug("Navigating to Login Page...");
         LoginPage loginPage = new LoginPage(page).navigate();
 
+
+        logger.info("Verifying login page URL and UI elements visibility.");
         assertThat(loginPage.getPage().url())
                 .as("Login page URL")
                 .contains(AppConstants.BASE_URL);
@@ -41,12 +45,14 @@ public class LoginTest extends BaseTest {
         SoftAssertions softly = new SoftAssertions();
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
+        logger.debug("Performing login sequence...");
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
                 .enterUsername(user.getUsername())
                 .enterPassword(user.getPassword())
                 .clickLoginButton();
 
+        logger.info("Verifying inventory page components after login.");
         assertThat(inventoryPage.getPage().url())
                 .as("Inventory page URL")
                 .isEqualTo(AppConstants.INVENTORY_URL);
@@ -68,18 +74,23 @@ public class LoginTest extends BaseTest {
                 .isTrue();
 
         softly.assertAll();
+
+        logger.debug("Resetting application state and logging out.");
         appStateUtils.resetStateAndLogout();
     }
 
     @Test
     public void testInvalidLogin() {
         SoftAssertions softly = new SoftAssertions();
+
+        logger.debug("Attempting login with invalid credentials...");
         LoginPage loginPage = new LoginPage(page).navigate();
 
         loginPage.enterUsername("invalid_username")
                 .enterPassword("invalid_password")
                 .clickLoginButton();
 
+        logger.info("Verifying error message display for invalid credentials.");
         softly.assertThat(loginPage.isErrorMessageDisplayed())
                 .as("Error message displayed")
                 .isTrue();

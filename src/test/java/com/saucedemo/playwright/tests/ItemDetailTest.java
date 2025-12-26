@@ -26,6 +26,7 @@ public class ItemDetailTest extends BaseTest {
                 .login(user.getUsername(), user.getPassword())
                 .clickItemNameByIndex(FIRST_ITEM);
 
+        logger.info("Verifying item detail page loads with all UI components.");
         assertThat(itemDetailPage.getPage().url())
                 .as("Item Detail page URL")
                 .contains(AppConstants.ITEM_DETAIL_URL);
@@ -63,10 +64,14 @@ public class ItemDetailTest extends BaseTest {
         ItemDetailPage itemDetailPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .clickItemNameByIndex(FIRST_ITEM)
-                .clickAddToCartButton();
+                .clickItemNameByIndex(FIRST_ITEM);
 
-        softly.assertThat(page.locator(HeaderLocators.SHOPPING_CART_BADGE).innerText())
+        logger.info("Adding item to cart from detail page.");
+        itemDetailPage.clickAddToCartButton();
+
+        String badgeCount = page.locator(HeaderLocators.SHOPPING_CART_BADGE).innerText();
+        logger.info("Verified cart badge updated to: {}", badgeCount);
+        softly.assertThat(badgeCount)
                 .as("Shopping cart badge shows 1 item")
                 .isEqualTo(EXPECTED_CART_BADGE_DISPLAYED_NUMBER);
 
@@ -74,9 +79,13 @@ public class ItemDetailTest extends BaseTest {
                 .as("Remove button is visible after adding to cart")
                 .isTrue();
 
+        logger.info("Removing item from cart from detail page.");
         itemDetailPage.clickRemoveButton();
 
-        softly.assertThat(page.locator(HeaderLocators.SHOPPING_CART_BADGE).isVisible())
+        boolean isBadgeVisible = page.locator(HeaderLocators.SHOPPING_CART_BADGE).isVisible();
+        logger.debug("Cart badge visibility after removal: {}", isBadgeVisible);
+
+        softly.assertThat(isBadgeVisible)
                 .as("Shopping cart badge is not visible after removing item")
                 .isFalse();
 
@@ -105,7 +114,7 @@ public class ItemDetailTest extends BaseTest {
     @Test
     public void testSpecificItemDetailPage() {
         int FLEE_JACKET_ID = 5;
-        double FLEE_JACKET_PRICE = 49.99;
+        double EXPECTED_PRICE = 49.99;
 
         SoftAssertions softly = new SoftAssertions();
 
@@ -114,17 +123,24 @@ public class ItemDetailTest extends BaseTest {
                 .login(user.getUsername(), user.getPassword())
                 .clickSpecificItem(InventoryPageLocators.FLEE_JACKET);
 
+        String actualName = itemDetailPage.getItemName();
+        Double actualPrice = itemDetailPage.getItemPrice();
+
+        logger.info("Verifying specific product details: " +
+                "[Expected Name: Sauce Labs Fleece Jacket, Actual: {}]", actualName);
+        logger.info("Verifying product price: [Expected: ${}, Actual: ${}]", EXPECTED_PRICE, actualPrice);
+
         assertThat(page.url())
                 .as("Item Detail page URL for Sauce Labs Fleece Jacket")
                 .contains(AppConstants.ITEM_DETAIL_URL + FLEE_JACKET_ID);
 
-        softly.assertThat(itemDetailPage.getItemName())
+        softly.assertThat(actualName)
                 .as("Item name for Sauce Labs Fleece Jacket")
                 .isEqualTo("Sauce Labs Fleece Jacket");
 
-        softly.assertThat(itemDetailPage.getItemPrice())
+        softly.assertThat(actualPrice)
                 .as("Item price for Sauce Labs Fleece Jacket")
-                .isEqualTo(FLEE_JACKET_PRICE);
+                .isEqualTo(EXPECTED_PRICE);
 
         softly.assertThat(itemDetailPage.getItemDescription())
                 .as("Item description for Sauce Labs Fleece Jacket")

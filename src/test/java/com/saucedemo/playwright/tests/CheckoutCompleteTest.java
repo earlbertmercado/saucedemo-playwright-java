@@ -20,6 +20,7 @@ public class CheckoutCompleteTest extends BaseTest {
         SoftAssertions softly = new SoftAssertions();
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
+        logger.info("Executing full checkout flow for item index: {}", FIRST_ITEM);
         CheckoutCompletePage checkoutCompletePage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
@@ -32,6 +33,7 @@ public class CheckoutCompleteTest extends BaseTest {
                 .clickContinueButton()
                 .clickFinishButton();
 
+        logger.info("Verifying final checkout completion state.");
         assertThat(page.url())
                 .as("Checkout Complete page URL")
                 .isEqualTo(AppConstants.CHECKOUT_COMPLETE_URL);
@@ -53,6 +55,8 @@ public class CheckoutCompleteTest extends BaseTest {
                 .isTrue();
 
         softly.assertAll();
+
+        logger.debug("Cleaning up application state.");
         appStateUtils.resetStateAndLogout();
     }
 
@@ -62,6 +66,7 @@ public class CheckoutCompleteTest extends BaseTest {
 
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
+        logger.debug("Navigating through checkout to reach the Back Home button...");
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
@@ -75,6 +80,7 @@ public class CheckoutCompleteTest extends BaseTest {
                 .clickFinishButton()
                 .clickBackHomeButton();
 
+        logger.info("Verifying navigation back to Inventory Page.");
         assertThat(inventoryPage.getPage().url())
                 .as("Navigated back to Inventory Page")
                 .isEqualTo(AppConstants.INVENTORY_URL);

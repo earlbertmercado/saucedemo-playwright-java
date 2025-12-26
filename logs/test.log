@@ -1,0 +1,82 @@
+2025-12-26 20:38:29.592 INFO  [-] - Test Execution Started
+2025-12-26 20:38:29.612 INFO  [-] - Starting CHROME browser with headed mode
+2025-12-26 20:38:34.698 INFO  [-] - Started CHROME browser
+2025-12-26 20:38:34.699 INFO  [-] - Browser launched successfully.
+2025-12-26 20:38:34.797 INFO  [-] - Loaded user test data: standard_user
+2025-12-26 20:38:34.803 INFO  [9ca270d3] - Test started: LoginTest/testInvalidLogin
+2025-12-26 20:38:34.889 DEBUG [9ca270d3] - Attempting login with invalid credentials...
+2025-12-26 20:38:34.892 INFO  [9ca270d3] - Navigating to Login Page: https://www.saucedemo.com
+2025-12-26 20:38:34.927 DEBUG [9ca270d3] - Entering username: invalid_username
+2025-12-26 20:38:34.954 DEBUG [9ca270d3] - Entering password.
+2025-12-26 20:38:34.962 DEBUG [9ca270d3] - Clicking login button.
+2025-12-26 20:38:35.005 INFO  [9ca270d3] - Verifying error message display for invalid credentials.
+2025-12-26 20:38:35.009 WARN  [9ca270d3] - Error message is visible on the Login Page.
+2025-12-26 20:38:35.298 WARN  [9ca270d3] - Error message is visible on the Login Page.
+2025-12-26 20:38:35.300 DEBUG [9ca270d3] - Captured error message: Epic sadface: Username and password do not match any user in this service
+2025-12-26 20:38:35.300 DEBUG [9ca270d3] - Clearing login form fields.
+2025-12-26 20:38:35.316 INFO  [9ca270d3] - Test passed: LoginTest/testInvalidLogin
+2025-12-26 20:38:35.317 INFO  [-] - Loaded user test data: standard_user
+2025-12-26 20:38:35.317 INFO  [98645502] - Test started: LoginTest/testLoginPageLoad
+2025-12-26 20:38:35.318 DEBUG [98645502] - Navigating to Login Page...
+2025-12-26 20:38:35.318 INFO  [98645502] - Navigating to Login Page: https://www.saucedemo.com
+2025-12-26 20:38:35.336 INFO  [98645502] - Verifying login page URL and UI elements visibility.
+2025-12-26 20:38:35.362 INFO  [98645502] - Test passed: LoginTest/testLoginPageLoad
+2025-12-26 20:38:35.363 INFO  [-] - Loaded user test data: standard_user
+2025-12-26 20:38:35.364 INFO  [000bb8c4] - Test started: LoginTest/testValidLogin
+2025-12-26 20:38:35.365 DEBUG [000bb8c4] - Performing login sequence...
+2025-12-26 20:38:35.365 INFO  [000bb8c4] - Navigating to Login Page: https://www.saucedemo.com
+2025-12-26 20:38:35.381 DEBUG [000bb8c4] - Entering username: standard_user
+2025-12-26 20:38:35.392 DEBUG [000bb8c4] - Entering password.
+2025-12-26 20:38:35.397 DEBUG [000bb8c4] - Clicking login button.
+2025-12-26 20:38:35.449 INFO  [000bb8c4] - Verifying inventory page components after login.
+2025-12-26 20:38:35.455 DEBUG [000bb8c4] - Resetting application state and logging out.
+2025-12-26 20:38:35.482 INFO  [000bb8c4] - Burger menu clicked.
+2025-12-26 20:38:36.420 INFO  [000bb8c4] - Application state has been reset.
+2025-12-26 20:38:36.455 INFO  [000bb8c4] - Burger menu clicked.
+2025-12-26 20:38:37.315 INFO  [000bb8c4] - User has been logged out.
+2025-12-26 20:38:37.316 INFO  [000bb8c4] - Test passed: LoginTest/testValidLogin
+2025-12-26 20:38:37.317 INFO  [-] - Closing browser.
+2025-12-26 20:38:37.431 INFO  [-] - Cleanup done.
+2025-12-26 20:38:37.432 INFO  [-] - Browser closed successfully.
+2025-12-26 20:38:37.591 INFO  [-] - Test Execution Finished
+2025-12-26 20:39:37.352 INFO  [-] - Test Execution Started
+2025-12-26 20:39:37.372 INFO  [-] - Starting CHROME browser with headed mode
+2025-12-26 20:39:42.384 INFO  [-] - Started CHROME browser
+2025-12-26 20:39:42.384 INFO  [-] - Browser launched successfully.
+2025-12-26 20:39:42.483 INFO  [-] - Loaded user test data: standard_user
+2025-12-26 20:39:42.490 INFO  [14c939de] - Test started: LoginTest/testInvalidLogin
+2025-12-26 20:39:42.574 DEBUG [14c939de] - Attempting login with invalid credentials...
+2025-12-26 20:39:42.576 INFO  [14c939de] - Navigating to Login Page: https://www.saucedemo.com
+2025-12-26 20:39:42.606 DEBUG [14c939de] - Entering username: invalid_username
+2025-12-26 20:39:42.634 DEBUG [14c939de] - Entering password.
+2025-12-26 20:39:42.642 DEBUG [14c939de] - Clicking login button.
+2025-12-26 20:39:42.687 INFO  [14c939de] - Verifying error message display for invalid credentials.
+2025-12-26 20:39:42.690 WARN  [14c939de] - Error message is visible on the Login Page.
+2025-12-26 20:39:42.980 WARN  [14c939de] - Error message is visible on the Login Page.
+2025-12-26 20:39:42.983 DEBUG [14c939de] - Captured error message: Epic sadface: Username and password do not match any user in this service
+2025-12-26 20:39:42.983 DEBUG [14c939de] - Clearing login form fields.
+2025-12-26 20:39:42.998 INFO  [14c939de] - Test passed: LoginTest/testInvalidLogin
+2025-12-26 20:39:43.000 INFO  [-] - Loaded user test data: standard_user
+2025-12-26 20:39:43.000 INFO  [9c405126] - Test started: LoginTest/testLoginPageLoad
+2025-12-26 20:39:43.000 DEBUG [9c405126] - Navigating to Login Page...
+2025-12-26 20:39:43.001 INFO  [9c405126] - Navigating to Login Page: https://www.saucedemo.com
+2025-12-26 20:39:43.021 INFO  [9c405126] - Verifying login page URL and UI elements visibility.
+2025-12-26 20:39:43.050 INFO  [9c405126] - Test passed: LoginTest/testLoginPageLoad
+2025-12-26 20:39:43.051 INFO  [-] - Loaded user test data: standard_user
+2025-12-26 20:39:43.051 INFO  [fbe38d43] - Test started: LoginTest/testValidLogin
+2025-12-26 20:39:43.052 DEBUG [fbe38d43] - Performing login sequence...
+2025-12-26 20:39:43.052 INFO  [fbe38d43] - Navigating to Login Page: https://www.saucedemo.com
+2025-12-26 20:39:43.079 DEBUG [fbe38d43] - Entering username: standard_user
+2025-12-26 20:39:43.090 DEBUG [fbe38d43] - Entering password.
+2025-12-26 20:39:43.094 DEBUG [fbe38d43] - Clicking login button.
+2025-12-26 20:39:43.149 INFO  [fbe38d43] - Verifying inventory page components after login.
+2025-12-26 20:39:43.155 DEBUG [fbe38d43] - Resetting application state and logging out.
+2025-12-26 20:39:43.191 INFO  [fbe38d43] - Burger menu clicked.
+2025-12-26 20:39:44.131 INFO  [fbe38d43] - Application state has been reset.
+2025-12-26 20:39:44.167 INFO  [fbe38d43] - Burger menu clicked.
+2025-12-26 20:39:45.025 INFO  [fbe38d43] - User has been logged out.
+2025-12-26 20:39:45.026 INFO  [fbe38d43] - Test passed: LoginTest/testValidLogin
+2025-12-26 20:39:45.027 INFO  [-] - Closing browser.
+2025-12-26 20:39:45.137 INFO  [-] - Cleanup done.
+2025-12-26 20:39:45.137 INFO  [-] - Browser closed successfully.
+2025-12-26 20:39:45.292 INFO  [-] - Test Execution Finished

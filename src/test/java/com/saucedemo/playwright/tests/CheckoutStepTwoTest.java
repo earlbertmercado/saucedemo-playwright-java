@@ -30,6 +30,7 @@ public class CheckoutStepTwoTest extends BaseTest {
                 .enterPostalCode(user.getPostalCode())
                 .clickContinueButton();
 
+        logger.info("Verifying Step Two Page URL and UI elements.");
         assertThat(page.url())
                 .as("Checkout Step Two page URL")
                 .isEqualTo(AppConstants.CHECKOUT_STEP_TWO_URL);
@@ -75,6 +76,7 @@ public class CheckoutStepTwoTest extends BaseTest {
         SoftAssertions softly = new SoftAssertions();
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
+        logger.debug("Navigating through checkout with multiple items...");
         CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
@@ -88,8 +90,10 @@ public class CheckoutStepTwoTest extends BaseTest {
                 .enterPostalCode(user.getPostalCode())
                 .clickContinueButton();
 
+        logger.info("Beginning math verification for Checkout Totals.");
         Double expectedTotalBeforeTax = checkoutStepTwoPage.getTotalItemPrices();
         Double actualTotalBeforeTax = checkoutStepTwoPage.getTotalBeforeTax();
+        logger.info("Expected Subtotal: ${}, Actual: ${}", expectedTotalBeforeTax, actualTotalBeforeTax);
 
         softly.assertThat(actualTotalBeforeTax)
                 .as("Total before tax matches sum of item prices")
@@ -98,6 +102,8 @@ public class CheckoutStepTwoTest extends BaseTest {
         Double tax = checkoutStepTwoPage.getTax();
         Double expectedTotalAfterTax = expectedTotalBeforeTax + tax;
         Double actualTotalAfterTax = checkoutStepTwoPage.getTotalAfterTax();
+        logger.info("Tax: ${}", tax);
+        logger.info("Expected Final: ${}, Actual Final: ${}", expectedTotalAfterTax, actualTotalAfterTax);
 
         softly.assertThat(actualTotalAfterTax)
                 .as("Total after tax matches total before tax plus tax")

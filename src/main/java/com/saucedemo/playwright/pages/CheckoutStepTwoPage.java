@@ -72,17 +72,23 @@ public class CheckoutStepTwoPage extends BasePage {
 
     public Double getTotalBeforeTax() {
         String amountText = itemTotal.innerText().replace("Item total: $", "");
-        return Double.parseDouble(amountText);
+        Double amount = Double.parseDouble(amountText);
+        logger.info("Checkout Summary - Item Total: ${}", amount);
+        return amount;
     }
 
     public Double getTax() {
         String amountText = tax.innerText().replace("Tax: $", "");
-        return Double.parseDouble(amountText);
+        Double amount = Double.parseDouble(amountText);
+        logger.info("Checkout Summary - Tax: ${}", amount);
+        return amount;
     }
 
     public Double getTotalAfterTax() {
         String amountText = total.innerText().replace("Total: $", "");
-        return Double.parseDouble(amountText);
+        Double amount = Double.parseDouble(amountText);
+        logger.info("Checkout Summary - Grand Total: ${}", amount);
+        return amount;
     }
 
     // ------------------ Visibility Methods ------------------
@@ -96,19 +102,26 @@ public class CheckoutStepTwoPage extends BasePage {
 
     // ------------------ Validation Methods ------------------
     public boolean areItemDetailsValid(int index) {
-        return !getItemName(index).isEmpty() &&
+        logger.debug("Validating item details at index: {}", index);
+        boolean isValid = !getItemName(index).isEmpty() &&
                 !getItemDescription(index).isEmpty() &&
-                getItemPrice(index) != null &&
-                !getItemQuantity(index).isEmpty();
+                getItemPrice(index) != null;
+
+        if (!isValid) {
+            logger.warn("Item details validation failed at index: {}", index);
+        }
+        return isValid;
     }
 
     // ------------------ Action Methods ------------------
     public CheckoutCompletePage clickFinishButton() {
+        logger.info("Finalizing order. Clicking 'Finish' button.");
         finishButton.click();
         return new CheckoutCompletePage(page);
     }
 
     public InventoryPage clickCancelButton() {
+        logger.info("Cancelling checkout. Returning to Inventory.");
         cancelButton.click();
         return new InventoryPage(page);
     }

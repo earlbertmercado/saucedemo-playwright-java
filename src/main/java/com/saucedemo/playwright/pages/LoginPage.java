@@ -22,27 +22,32 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage navigate() {
+        logger.info("Navigating to Login Page: {}", AppConstants.BASE_URL);
         page.navigate(AppConstants.BASE_URL);
         return this;
     }
 
     // ------------------ Action Methods ------------------
     public LoginPage enterUsername(String username) {
+        logger.debug("Entering username: {}", username);
         usernameInput.fill(username);
         return this;
     }
 
     public LoginPage enterPassword(String password) {
+        logger.debug("Entering password.");
         passwordInput.fill(password);
         return this;
     }
 
     public InventoryPage clickLoginButton() {
+        logger.debug("Clicking login button.");
         loginButton.click();
         return new InventoryPage(page);
     }
 
     public InventoryPage login(String username, String password) {
+        logger.info("Attempting login for user: {}", username);
         return enterUsername(username)
                 .enterPassword(password)
                 .clickLoginButton();
@@ -57,6 +62,7 @@ public class LoginPage extends BasePage {
     }
 
     public void clearAllFields() {
+        logger.debug("Clearing login form fields.");
         clearUsername();
         clearPassword();
     }
@@ -75,11 +81,17 @@ public class LoginPage extends BasePage {
     }
 
     public boolean isErrorMessageDisplayed() {
-        return errorMessage.isVisible();
+        boolean isVisible = errorMessage.isVisible();
+        if (isVisible) {
+            logger.warn("Error message is visible on the Login Page.");
+        }
+        return isVisible;
     }
 
     public String getErrorMessage() {
-        return errorMessage.textContent().trim();
+        String msg = errorMessage.textContent().trim();
+        logger.debug("Captured error message: {}", msg);
+        return msg;
     }
 
     public boolean hasErrorMessage(String expectedError) {

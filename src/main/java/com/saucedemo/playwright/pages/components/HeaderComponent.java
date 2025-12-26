@@ -33,16 +33,21 @@ public class HeaderComponent extends BasePage {
     }
 
     public boolean isShoppingCartBadgeVisible() {
-        return shoppingCartBadge.isVisible();
+        boolean isVisible = shoppingCartBadge.isVisible();
+        logger.debug("Header: Cart badge visibility = {}", isVisible);
+        return isVisible;
     }
 
     // ------------------ Getter Methods ------------------
     public String getShoppingCartBadgeText() {
-        return shoppingCartBadge.innerText();
+        String text = shoppingCartBadge.innerText();
+        logger.debug("Header: Shopping cart badge count is: {}", text);
+        return text;
     }
 
     // ------------------ Action Methods ------------------
     public void clickBurgerMenu() {
+        logger.debug("Opening Sidebar Menu via burger button.");
         burgerMenuButton.click();
     }
 
@@ -57,14 +62,18 @@ public class HeaderComponent extends BasePage {
     }
 
     public LoginPage clickLogoutLink() {
+        logger.info("Header: Initiating logout sequence.");
         clickBurgerMenu();
+        logger.debug("Clicking Logout link in sidebar.");
         logoutLink.click();
         return new LoginPage(page);
     }
 
     public void clickResetAppStateLink() {
+        logger.info("Header: Resetting Application State.");
         clickBurgerMenu();
         resetAppStateLink.click();
+        logger.debug("Reloading page to finalize state reset.");
         page.reload();
     }
 }

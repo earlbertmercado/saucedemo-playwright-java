@@ -23,6 +23,7 @@ public class InventoryTest extends BaseTest {
                 .navigate()
                 .login(user.getUsername(), user.getPassword());
 
+        logger.info("Verifying Inventory page elements presence and visibility.");
         assertThat(inventoryPage.getPage().url())
                 .as("Inventory page URL")
                 .isEqualTo(AppConstants.INVENTORY_URL);
@@ -64,6 +65,7 @@ public class InventoryTest extends BaseTest {
                 .login(user.getUsername(), user.getPassword())
                 .sortByNameAsc();
 
+        logger.info("Verifying that item prices are sorted in ascending order.");
         assertThat(inventoryPage.isSortedAlphabeticallyAsc())
                 .as("Inventory sorted by name ascending")
                 .isTrue();
@@ -80,6 +82,7 @@ public class InventoryTest extends BaseTest {
                 .login(user.getUsername(), user.getPassword())
                 .sortByNameDesc();
 
+        logger.info("Verifying that item prices are sorted in descending order.");
         assertThat(inventoryPage.isSortedAlphabeticallyDesc())
                 .as("Inventory sorted by name descending")
                 .isTrue();
@@ -96,6 +99,7 @@ public class InventoryTest extends BaseTest {
                 .login(user.getUsername(), user.getPassword())
                 .sortByPriceAsc();
 
+        logger.info("Verifying that item prices are sorted ascending order.");
         assertThat(inventoryPage.isSortedByPriceAsc())
                 .as("Inventory sorted by price ascending")
                 .isTrue();
@@ -112,6 +116,7 @@ public class InventoryTest extends BaseTest {
                 .login(user.getUsername(), user.getPassword())
                 .sortByPriceDesc();
 
+        logger.info("Verifying that item prices are sorted descending order.");
         assertThat(inventoryPage.isSortedByPriceDesc())
                 .as("Inventory sorted by price descending")
                 .isTrue();
@@ -150,7 +155,10 @@ public class InventoryTest extends BaseTest {
                 .addItemToCartByIndex(SECOND_ITEM)
                 .addItemToCartByIndex(THIRD_ITEM);
 
-        assertThat(inventoryPage.getCartItemCount())
+        int actualCount = inventoryPage.getCartItemCount();
+        logger.info("Verification: Cart badge count is {}", actualCount);
+
+        assertThat(actualCount)
                 .as("Shopping cart badge item count after adding items")
                 .isEqualTo(EXPECTED_CART_BADGE_COUNT);
 
@@ -175,10 +183,12 @@ public class InventoryTest extends BaseTest {
                 .removeItemFromCartByIndex(SECOND_ITEM)
                 .removeItemFromCartByIndex(THIRD_ITEM);
 
-        assertThat(inventoryPage
+        boolean isBadgeVisible = inventoryPage
                 .getPage()
                 .locator(HeaderLocators.SHOPPING_CART_BADGE)
-                .isVisible())
+                .isVisible();
+        logger.info("Verification: Cart badge visibility after removing all items is {}", isBadgeVisible);
+        assertThat(isBadgeVisible)
                 .as("Shopping cart badge is invisible after removing all items")
                 .isFalse();
 
@@ -187,7 +197,7 @@ public class InventoryTest extends BaseTest {
 
     @Test
     public void testClickingItemNavigatesToItemDetailPage() {
-        int FIRST_ITEM = 0;
+        int TARGET_INDEX = 0;
 
         AppStateUtils appStateUtils = new AppStateUtils(page);
         InventoryPage inventoryPage = new InventoryPage(page);
@@ -195,14 +205,15 @@ public class InventoryTest extends BaseTest {
         ItemDetailPage itemDetailPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .clickItemNameByIndex(FIRST_ITEM);
+                .clickItemNameByIndex(TARGET_INDEX);
 
+        logger.info("Verifying navigation to Detail Page for item index {}", TARGET_INDEX);
         assertThat(itemDetailPage.isRedirectedToItemDetailPage())
                 .as("Redirected to item detail page when clicking item name")
                 .isTrue();
 
         itemDetailPage.clickBackToProducts();
-        inventoryPage.clickItemImageByIndex(FIRST_ITEM);
+        inventoryPage.clickItemImageByIndex(TARGET_INDEX);
 
         assertThat(itemDetailPage.isRedirectedToItemDetailPage())
                 .as("Redirected to item detail page when clicking item image")

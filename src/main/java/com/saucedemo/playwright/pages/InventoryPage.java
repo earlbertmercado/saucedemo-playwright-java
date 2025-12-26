@@ -128,13 +128,19 @@ public class InventoryPage extends BasePage {
     }
 
     public InventoryPage addItemToCartByIndex(int index) {
+        String itemName = getItemName(index);
+        logger.info("Adding item to cart: '{}' (Index: {})", itemName, index);
+
         if ("Add to cart".equals(addToCartButtons.nth(index).textContent().trim())) {
             addToCartButtons.nth(index).click();
+        } else {
+            logger.warn("Item '{}' is already in the cart or button state is incorrect.", itemName);
         }
         return this;
     }
 
     public InventoryPage removeItemFromCartByIndex(int index) {
+        logger.info("Removing item from cart at index: {}", index);
         if ("Remove".equals(removeButtons.nth(index).textContent().trim())) {
             removeButtons.nth(index).click();
         }
@@ -143,32 +149,35 @@ public class InventoryPage extends BasePage {
 
     public int getCartItemCount() {
         if (cartBadge.isVisible()) {
-            try {
-                return Integer.parseInt(cartBadge.textContent().trim());
-            } catch (NumberFormatException e) {
-                logger.error("Error parsing cart item count: {}", cartBadge.textContent(), e);
-            }
+            String count = cartBadge.textContent().trim();
+            logger.debug("Shopping cart badge shows {} items.", count);
+            return Integer.parseInt(count);
         }
+        logger.debug("Shopping cart badge is not visible (Empty).");
         return 0;
     }
 
     // ------------------ Sorting Methods ------------------
     public InventoryPage sortByNameAsc() {
+        logger.info("Sorting products by Name (A to Z)");
         sortDropdown.selectOption("az");
         return this;
     }
 
     public InventoryPage sortByNameDesc() {
+        logger.info("Sorting products by Name (Z to A)");
         sortDropdown.selectOption("za");
         return this;
     }
 
     public InventoryPage sortByPriceAsc() {
+        logger.info("Sorting products by Price (Low to High)");
         sortDropdown.selectOption("lohi");
         return this;
     }
 
     public InventoryPage sortByPriceDesc() {
+        logger.info("Sorting products by Price (High to Low)");
         sortDropdown.selectOption("hilo");
         return this;
     }
@@ -217,8 +226,13 @@ public class InventoryPage extends BasePage {
     }
 
     public boolean areAllItemsValid() {
+        logger.info("Performing bulk validation of all displayed items.");
         List<ItemInfo> products = getAllItemInfo();
-        return !products.isEmpty() && products.stream().allMatch(ItemInfo::isValid);
+        return !products.isEmpty() && products.stream().allMatch(info -> {
+            boolean valid = info.isValid();
+            if (!valid) logger.error("Item validation failed for: {}", info.name());
+            return valid;
+        });
     }
 
     // ------------------ DTO / Record ------------------
