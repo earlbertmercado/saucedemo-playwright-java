@@ -74,8 +74,7 @@ pipeline {
         stage('Send Test Report via Email') {
             steps {
                 script {
-                    // Path to report (Windows-friendly)
-                    def reportFile = "${WORKSPACE}\\reports\\extent-report.html"
+                    def reportFile = "reports/extent-report.html"
 
                     if (fileExists(reportFile)) {
                         emailext(
