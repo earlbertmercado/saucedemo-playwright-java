@@ -11,7 +11,28 @@ pipeline {
     }
 
     parameters {
-        // Add whatever test classes you want as options
+
+        choice(
+            name: 'BROWSER',
+            choices: [
+                'CHROME',
+                'CHROMIUM',
+                'EDGE',
+                'FIREFOX',
+                'WEBKIT'
+            ],
+            description: 'Select browser to run tests'
+        )
+
+        choice(
+            name: 'HEADLESS',
+            choices: [
+                'true',
+                'false'
+            ],
+            description: 'Enable or disable headless execution'
+        )
+
         choice(
             name: 'TEST_CLASS',
             choices: [
@@ -46,11 +67,13 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    if (params.TEST_CLASS == 'All Tests') {
-                        bat "mvn clean test"
-                    } else {
-                        bat "mvn clean test -Dtest=${params.TEST_CLASS}"
+                    def mvnCmd = "mvn clean test -Dbrowser=${params.BROWSER} -DisHeadless=${params.HEADLESS}"
+
+                    if (params.TEST_CLASS != 'All Tests') {
+                        mvnCmd = "${mvnCmd} -Dtest=${params.TEST_CLASS}"
                     }
+
+                    bat mvnCmd
                 }
             }
         }
