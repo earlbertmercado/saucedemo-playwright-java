@@ -75,11 +75,12 @@ public class CartPage extends BasePage {
     public boolean isValidItem(int index) {
         String name = itemNames.nth(index).innerText();
         String priceText = itemPrices.nth(index).innerText().replace("$", "");
+        String description = itemDescriptions.nth(index).innerText();
 
         logger.debug("Checking item at index {}: [Name: {}, Price: {}]", index, name, priceText);
 
-        if (name.isEmpty()) {
-            logger.warn("Item at index {} has an empty name.", index);
+        if (name.isEmpty() || description.isEmpty()) {
+            logger.warn("Item at index {} has an empty name or description.", index);
             return false;
         }
 
