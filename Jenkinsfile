@@ -23,22 +23,22 @@ pipeline {
             description: 'Enable or disable headless execution'
         )
 
-         choice(
-             name: 'TEST_CLASS',
-             choices: [
-                 'All Tests',
-                 'CartTest',
-                 'CheckoutCompleteTest',
-                 'CheckoutStepOneTest',
-                 'CheckoutStepTwoTest',
-                 'FooterComponentTest',
-                 'HeaderComponentTest',
-                 'InventoryTest',
-                 'ItemDetailTest',
-                 'LoginTest'
-             ],
-             description: 'Select which test class to execute'
-         )
+        choice(
+            name: 'TEST_CLASS',
+            choices: [
+                'All Tests',
+                'CartTest',
+                'CheckoutCompleteTest',
+                'CheckoutStepOneTest',
+                'CheckoutStepTwoTest',
+                'FooterComponentTest',
+                'HeaderComponentTest',
+                'InventoryTest',
+                'ItemDetailTest',
+                'LoginTest'
+            ],
+            description: 'Select which test class to execute'
+        )
     }
 
     stages {
@@ -71,24 +71,23 @@ pipeline {
             }
         }
 
- stage('Send Test Report via Email') {
-     steps {
-         script {
-             // Use a relative path and a glob pattern
-             def reportFile = "reports/extent-report.html"
+        stage('Send Test Report via Email') {
+            steps {
+                script {
+                    def reportFile = "reports/extent-report.html"
 
-             // Check if report exists
-             if (fileExists(reportFile)) {
-                 mail to: 'earlbertmercado@gmail.com',
-                      subject: "Saucedemo Playwright Test Report - ${currentBuild.currentResult}",
-                      body: "The test execution is complete. Please find the report attached.",
-                      attachmentsPattern: reportFile
-             } else {
-                 echo "Report file not found: ${reportFile}"
-             }
-         }
-     }
- }
+                    if (fileExists(reportFile)) {
+                        mail to: 'earlbertmercado@gmail.com',
+                             subject: "Saucedemo Playwright Test Report - ${currentBuild.currentResult}",
+                             body: "The test execution is complete. Please find the report attached.",
+                             attachmentsPattern: reportFile
+                    } else {
+                        echo "Report file not found: ${reportFile}"
+                    }
+                }
+            }
+        }
+    }
 
     post {
         success {
