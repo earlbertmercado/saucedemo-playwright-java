@@ -155,6 +155,7 @@ public class ExtentReportListener implements ITestListener, ISuiteListener {
         logger.warn("Test skipped: {}/{}",
                 result.getMethod().getTestClass().getRealClass().getSimpleName(),
                 result.getMethod().getMethodName());
+        ThreadContext.put(TEST_ID, DEFAULT_LOG_CONTEXT);
     }
 
     @Override

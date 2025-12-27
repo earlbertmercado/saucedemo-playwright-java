@@ -65,10 +65,6 @@ public class CheckoutStepOneTest extends BaseTest {
     public void testCheckoutStepOneFormSubmission() {
         int FIRST_ITEM = 0;
 
-        String firstName = "John";
-        String lastName = "Doe";
-        String postalCode = "12345";
-
         SoftAssertions softly = new SoftAssertions();
         AppStateUtils appStateUtils = new AppStateUtils(page);
 
@@ -83,7 +79,15 @@ public class CheckoutStepOneTest extends BaseTest {
                 .enterPostalCode(user.getPostalCode())
                 .clickContinueButton();
 
-        // TODO: Add assertions for Checkout Step Two page
+        logger.info("Verifying navigation to Checkout Step Two page after form submission.");
+        assertThat(page.url())
+                .as("Checkout Step Two page URL")
+                .isEqualTo(AppConstants.CHECKOUT_STEP_TWO_URL);
+
+        softly.assertThat(checkoutStepTwoPage.areItemDetailsValid(FIRST_ITEM))
+                .as("Item details valid on Checkout Step Two page")
+                .isTrue();
+
         appStateUtils.resetStateAndLogout();
     }
 

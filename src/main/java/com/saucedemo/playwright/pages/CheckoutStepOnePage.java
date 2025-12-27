@@ -70,16 +70,6 @@ public class CheckoutStepOnePage extends BasePage {
         return this;
     }
 
-    //TODO: use this method to fill all customer information at once in test
-//    public CheckoutStepOnePage fillCustomerInfo(String fName,
-//                                                       String lName,
-//                                                       String zip) {
-//        logger.info("Filling customer information: {} {}, {}", fName, lName, zip);
-//        return enterFirstName(fName)
-//                .enterLastName(lName)
-//                .enterPostalCode(zip);
-//    }
-
     public CheckoutStepTwoPage clickContinueButton() {
         logger.info("Clicking 'Continue' button to proceed to Step Two.");
         continueButton.click();
