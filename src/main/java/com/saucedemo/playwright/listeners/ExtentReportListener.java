@@ -70,10 +70,13 @@ public class ExtentReportListener implements ITestListener, ISuiteListener {
 
         extentReports.attachReporter(sparkReporter);
 
+        String browser = System.getProperty("browser", properties.getProperty("browser"));
+        String headless = System.getProperty("isHeadless", properties.getProperty("isHeadless"));
+
         // Add environment details to the dashboard
         extentReports.setSystemInfo("OS", System.getProperty("os.name"));
-        extentReports.setSystemInfo("Browser", properties.getProperty("browser"));
-        extentReports.setSystemInfo("Headless", properties.getProperty("isHeadless"));
+        extentReports.setSystemInfo("Browser", browser);
+        extentReports.setSystemInfo("Headless", headless);
 
         return extentReports;
     }

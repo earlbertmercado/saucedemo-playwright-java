@@ -42,10 +42,8 @@ public class BrowserManager {
         // 1. Check if overridden via Maven -D parameters (e.g., -Dbrowser=EDGE -DisHeadless=true)
         // 2. If not provided, fallback to config.properties values
         // 3. If still not set, use defaults: CHROMIUM for browser, false for headless
-        String browserName = System.getProperty("browser",
-                props.getProperty("browser", "CHROMIUM"));
-        boolean headless = Boolean.parseBoolean(System.getProperty("isHeadless",
-                props.getProperty("isHeadless", "false")));
+        String browserName = getProperty(props, "browser", "CHROMIUM");
+        boolean headless = Boolean.parseBoolean(getProperty(props, "isHeadless", "false"));
 
         Integer width = parseDimension(props.getProperty("browserWidth"), "width");
         Integer height = parseDimension(props.getProperty("browserHeight"), "height");
@@ -106,5 +104,10 @@ public class BrowserManager {
             }
         }
         return null;
+    }
+
+    // Helper to get a property with system override and default fallback
+    private String getProperty(Properties props, String key, String defaultValue) {
+        return System.getProperty(key, props.getProperty(key, defaultValue));
     }
 }
