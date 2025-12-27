@@ -47,13 +47,13 @@ saucedemo-playwright-java/
 │   └── test/
 │       ├── java/com/saucedemo/playwright/
 │       │   ├── base/			# Base Test class (Setup/Teardown)
-│       │   ├── dataprovider/           # Test data providers
+│       │   ├── dataprovider/   # Test data providers
 │       │   └── tests/			# Functional test classes
 │       └── resources/			# Test runners (testng.xml) and test data
-├── assets/	                        # README images
-├── Jenkinsfile                         # CI/CD pipeline definition
-├── docker-compose.yaml                 # Selenium Grid infrastructure
-└── pom.xml                             # Project dependencies and build config
+├── assets/	                    # README images
+├── Jenkinsfile                 # CI/CD pipeline definition
+├── docker-compose.yaml         # Selenium Grid infrastructure
+└── pom.xml                     # Project dependencies and build config
 ```
 
 ## Getting Started
