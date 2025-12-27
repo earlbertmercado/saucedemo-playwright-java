@@ -74,14 +74,16 @@ pipeline {
         stage('Send Test Report via Email') {
             steps {
                 script {
+                    // Path to report (Windows-friendly)
                     def reportFile = "${WORKSPACE}\\reports\\extent-report.html"
-                    echo "Preparing to send email with report: ${reportFile}"
 
                     if (fileExists(reportFile)) {
-                        mail to: 'earlbertmercado@gmail.com',
-                             subject: "Saucedemo Playwright Test Report - ${currentBuild.currentResult}",
-                             body: "The test execution is complete. Please find the report attached.",
-                             attachmentsPattern: reportFile
+                        emailext(
+                            to: 'earlbertmercado@gmail.com',
+                            subject: "Saucedemo Playwright Test Report - ${currentBuild.currentResult}",
+                            body: "The test execution is complete. Please find the report attached.",
+                            attachmentsPattern: reportFile
+                        )
                     } else {
                         echo "Report file not found: ${reportFile}"
                     }
