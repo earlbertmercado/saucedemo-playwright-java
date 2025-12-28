@@ -151,9 +151,7 @@ public class InventoryTest extends BaseTest {
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
-                .addItemToCartByIndex(SECOND_ITEM)
-                .addItemToCartByIndex(THIRD_ITEM);
+                .addItemsToCart(FIRST_ITEM, SECOND_ITEM, THIRD_ITEM);
 
         int actualCount = inventoryPage.getCartItemCount();
         logger.info("Verification: Cart badge count is {}", actualCount);
@@ -176,12 +174,7 @@ public class InventoryTest extends BaseTest {
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
-                .addItemToCartByIndex(SECOND_ITEM)
-                .addItemToCartByIndex(THIRD_ITEM)
-                .removeItemFromCartByIndex(FIRST_ITEM)
-                .removeItemFromCartByIndex(SECOND_ITEM)
-                .removeItemFromCartByIndex(THIRD_ITEM);
+                .addThenRemoveItems(FIRST_ITEM, SECOND_ITEM, THIRD_ITEM);
 
         boolean isBadgeVisible = inventoryPage
                 .getPage()
