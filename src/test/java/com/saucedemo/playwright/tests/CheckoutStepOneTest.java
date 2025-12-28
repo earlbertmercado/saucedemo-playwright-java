@@ -24,7 +24,7 @@ public class CheckoutStepOneTest extends BaseTest {
         CheckoutStepOnePage checkoutStepOnePage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout();
 
@@ -71,7 +71,7 @@ public class CheckoutStepOneTest extends BaseTest {
         CheckoutStepTwoPage checkoutStepTwoPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
                 .enterFirstName(user.getFirstName())
@@ -102,7 +102,7 @@ public class CheckoutStepOneTest extends BaseTest {
         new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
                 .enterLastName(user.getLastName())
@@ -133,7 +133,7 @@ public class CheckoutStepOneTest extends BaseTest {
         new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
                 .enterFirstName(user.getFirstName())
@@ -164,7 +164,7 @@ public class CheckoutStepOneTest extends BaseTest {
         new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout()
                 .enterFirstName(user.getFirstName())
@@ -193,7 +193,7 @@ public class CheckoutStepOneTest extends BaseTest {
         CheckoutStepOnePage checkoutStepOnePage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickCheckout();
 

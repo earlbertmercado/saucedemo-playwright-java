@@ -24,7 +24,7 @@ public class CartTest extends BaseTest {
         CartPage cartPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart();
 
         logger.info("Verifying Cart Page URL and primary UI components.");
@@ -66,7 +66,7 @@ public class CartTest extends BaseTest {
         CartPage cartPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart();
 
         softly.assertThat(cartPage.getCartItemCount())
@@ -94,9 +94,7 @@ public class CartTest extends BaseTest {
         CartPage cartPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
-                .addItemToCartByIndex(SECOND_ITEM)
-                .addItemToCartByIndex(THIRD_ITEM)
+                .addItemsToCart(FIRST_ITEM, SECOND_ITEM, THIRD_ITEM)
                 .clickShoppingCart();
 
         logger.info("Validating cart item count and total quantity.");
@@ -122,7 +120,7 @@ public class CartTest extends BaseTest {
         CartPage cartPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart();
 
         softly.assertThat(cartPage.getCartItemCount())
@@ -151,7 +149,7 @@ public class CartTest extends BaseTest {
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
+                .addItemsToCart(FIRST_ITEM)
                 .clickShoppingCart()
                 .clickContinueShopping();
 

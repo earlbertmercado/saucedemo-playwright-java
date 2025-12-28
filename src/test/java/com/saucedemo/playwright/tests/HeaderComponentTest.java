@@ -58,7 +58,7 @@ public class HeaderComponentTest extends BaseTest {
                 .as("Sauce Labs About page URL after clicking About link")
                 .isEqualTo(AppConstants.SAUCE_LABS_URL);
 
-        page.goBack();
+        inventoryPage.getPage().goBack();
         appStateUtils.resetStateAndLogout();
     }
 
@@ -94,7 +94,7 @@ public class HeaderComponentTest extends BaseTest {
         InventoryPage inventoryPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM);
+                .addItemsToCart(FIRST_ITEM);
 
         logger.info("Initial State: Item added. Cart badge visible: {}", header.isShoppingCartBadgeVisible());
 
@@ -135,14 +135,12 @@ public class HeaderComponentTest extends BaseTest {
         CartPage cartPage = new LoginPage(page)
                 .navigate()
                 .login(user.getUsername(), user.getPassword())
-                .addItemToCartByIndex(FIRST_ITEM)
-                .addItemToCartByIndex(SECOND_ITEM)
-                .addItemToCartByIndex(THIRD_ITEM)
+                .addItemsToCart(FIRST_ITEM, SECOND_ITEM, THIRD_ITEM)
                 .clickShoppingCart();
 
         String badgeCount = header.getShoppingCartBadgeText();
         logger.info("Initial badge count: {}. Performing page reload to test persistence.", badgeCount);
-        page.reload();
+        cartPage.getPage().reload();
 
         String badgeAfterReload = header.getShoppingCartBadgeText();
         logger.info("Badge count after reload: {}", badgeAfterReload);

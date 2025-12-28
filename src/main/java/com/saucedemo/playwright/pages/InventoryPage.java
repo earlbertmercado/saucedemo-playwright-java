@@ -147,6 +147,32 @@ public class InventoryPage extends BasePage {
         return this;
     }
 
+    public InventoryPage addItemsToCart(int... indices) {
+        logger.info("Adding multiple items to cart.");
+
+        for (int index : indices) {
+            logger.debug("Adding item at index {}", index);
+            addItemToCartByIndex(index);
+        }
+        return this;
+    }
+
+    public InventoryPage removeItemsFromCart(int... indices) {
+        logger.info("Removing multiple items from cart.");
+
+        for (int index : indices) {
+            logger.debug("Removing item at index {}", index);
+            removeItemFromCartByIndex(index);
+        }
+        return this;
+    }
+
+    public InventoryPage addThenRemoveItems(int... indices) {
+        addItemsToCart(indices);
+        removeItemsFromCart(indices);
+        return this;
+    }
+
     public int getCartItemCount() {
         if (cartBadge.isVisible()) {
             String count = cartBadge.textContent().trim();
