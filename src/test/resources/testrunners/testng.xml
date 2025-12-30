@@ -3,60 +3,60 @@
 <suite name="SauceDemo Test Suite" parallel="tests">
 
     <listeners>
-        <listener class-name="com.saucedemo.playwright.listeners.ExtentReportListener"/>
+        <listener class-name="com.earlbertmercado.playwright.saucedemo.listeners.ExtentReportListener"/>
     </listeners>
 
     <test verbose="4" name="Login Page Validation">
         <classes>
-            <class name="com.saucedemo.playwright.tests.LoginTest"/>
+            <class name="com.earlbertmercado.playwright.saucedemo.tests.LoginTest"/>
         </classes>
     </test>
 
     <test verbose="4" name="Inventory Page Validation">
         <classes>
-            <class name="com.saucedemo.playwright.tests.InventoryTest"/>
+            <class name="com.earlbertmercado.playwright.saucedemo.tests.InventoryTest"/>
         </classes>
     </test>
 
     <test verbose="4" name="ItemDetail Page Validation">
         <classes>
-            <class name="com.saucedemo.playwright.tests.ItemDetailTest"/>
+            <class name="com.earlbertmercado.playwright.saucedemo.tests.ItemDetailTest"/>
         </classes>
     </test>
 
     <test verbose="4" name="Cart Page Validation">
         <classes>
-            <class name="com.saucedemo.playwright.tests.CartTest"/>
+            <class name="com.earlbertmercado.playwright.saucedemo.tests.CartTest"/>
         </classes>
     </test>
 
     <test verbose="4" name="Checkout Step One Page Validation">
         <classes>
-            <class name="com.saucedemo.playwright.tests.CheckoutStepOneTest"/>
+            <class name="com.earlbertmercado.playwright.saucedemo.tests.CheckoutStepOneTest"/>
         </classes>
     </test>
 
     <test verbose="4" name="Checkout Step Two Page Validation">
         <classes>
-            <class name="com.saucedemo.playwright.tests.CheckoutStepTwoTest"/>
+            <class name="com.earlbertmercado.playwright.saucedemo.tests.CheckoutStepTwoTest"/>
         </classes>
     </test>
 
     <test verbose="4" name="Checkout Complete Page Validation">
         <classes>
-            <class name="com.saucedemo.playwright.tests.CheckoutCompleteTest"/>
+            <class name="com.earlbertmercado.playwright.saucedemo.tests.CheckoutCompleteTest"/>
         </classes>
     </test>
 
     <test verbose="4" name="Header Component Validation">
         <classes>
-            <class name="com.saucedemo.playwright.tests.HeaderComponentTest"/>
+            <class name="com.earlbertmercado.playwright.saucedemo.tests.HeaderComponentTest"/>
         </classes>
     </test>
 
     <test verbose="4" name="Footer Component Validation">
         <classes>
-            <class name="com.saucedemo.playwright.tests.FooterComponentTest"/>
+            <class name="com.earlbertmercado.playwright.saucedemo.tests.FooterComponentTest"/>
         </classes>
     </test>
 
