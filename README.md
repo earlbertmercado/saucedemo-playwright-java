@@ -69,7 +69,7 @@ saucedemo-playwright-java/
 - Fork or download this repository
 - Clone the repository and navigate to the project directory:
    ```shell
-    $ https://github.com/[your_username]/playwright-saucedemo-automation.git
+    $ https://github.com/[your_username]/playwright-saucedemo-java.git
     $ cd saucedemo-playwright-java
    ```
 
