@@ -1,6 +1,11 @@
 package com.earlbertmercado.playwright.saucedemo.constants;
 
-public class AppConstants {
+public final class AppConstants {
+
+    private AppConstants() {
+
+    }
+
     public static final String BASE_URL                 = "https://www.saucedemo.com";
     public static final String SAUCE_LABS_URL           = "https://saucelabs.com/";
     public static final String CART_URL                 = BASE_URL + "/cart.html";

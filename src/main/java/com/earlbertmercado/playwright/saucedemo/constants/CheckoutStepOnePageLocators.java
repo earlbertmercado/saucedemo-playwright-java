@@ -1,6 +1,11 @@
 package com.earlbertmercado.playwright.saucedemo.constants;
 
-public class CheckoutStepOnePageLocators {
+public final class CheckoutStepOnePageLocators {
+
+    private CheckoutStepOnePageLocators() {
+
+    }
+
     public static final String FIRST_NAME_INPUT     = "#first-name";
     public static final String LAST_NAME_INPUT      = "#last-name";
     public static final String POSTAL_CODE_INPUT    = "#postal-code";

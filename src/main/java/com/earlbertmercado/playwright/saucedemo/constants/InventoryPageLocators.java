@@ -1,6 +1,11 @@
 package com.earlbertmercado.playwright.saucedemo.constants;
 
-public class InventoryPageLocators {
+public final class InventoryPageLocators {
+
+    private InventoryPageLocators() {
+
+    }
+
     public static final String SORT_DROPDOWN        = ".product_sort_container";
     public static final String ITEMS                = ".inventory_item";
     public static final String ITEM_NAMES           = ".inventory_item_name";

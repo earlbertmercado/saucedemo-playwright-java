@@ -1,6 +1,11 @@
 package com.earlbertmercado.playwright.saucedemo.constants;
 
-public class CartPageLocators {
+public final class CartPageLocators {
+
+    private CartPageLocators() {
+
+    }
+
     public static final String CHECKOUT_BUTTON          = "#checkout";
     public static final String CONTINUE_SHOPPING_BUTTON = "#continue-shopping";
     public static final String CART_ITEMS               = ".cart_item";

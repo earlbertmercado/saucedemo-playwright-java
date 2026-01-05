@@ -1,6 +1,11 @@
 package com.earlbertmercado.playwright.saucedemo.constants;
 
-public class CheckoutStepTwoPageLocators {
+public final class CheckoutStepTwoPageLocators {
+
+    private CheckoutStepTwoPageLocators() {
+
+    }
+
     public static final String FINISH_BUTTON        = "#finish";
     public static final String CANCEL_BUTTON        = "#cancel";
     public static final String CART_ITEMS           = ".cart_item";

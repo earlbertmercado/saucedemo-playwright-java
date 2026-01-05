@@ -1,6 +1,11 @@
 package com.earlbertmercado.playwright.saucedemo.constants;
 
-public class ItemDetailPageLocators {
+public final class ItemDetailPageLocators {
+
+    private ItemDetailPageLocators() {
+
+    }
+
     public static final String BACK_TO_PRODUCTS_BUTTON  = "#back-to-products";
     public static final String ITEM_NAME                = ".inventory_details_name";
     public static final String ITEM_DESCRIPTION         = ".inventory_details_desc";

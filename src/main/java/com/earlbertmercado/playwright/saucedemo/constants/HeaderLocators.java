@@ -1,6 +1,11 @@
 package com.earlbertmercado.playwright.saucedemo.constants;
 
-public class HeaderLocators {
+public final class HeaderLocators {
+
+    private HeaderLocators() {
+
+    }
+
     public static final String SHOPPING_CART        = ".shopping_cart_link";
     public static final String SHOPPING_CART_BADGE  = ".shopping_cart_badge";
     public static final String BURGER_MENU_BUTTON   = "#react-burger-menu-btn";
