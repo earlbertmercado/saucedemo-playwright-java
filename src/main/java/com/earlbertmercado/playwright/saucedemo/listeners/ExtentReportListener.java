@@ -90,29 +90,29 @@ public class ExtentReportListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onTestStart(ITestResult result) {
+        String methodName = result.getMethod().getMethodName();
+        String className = result.getMethod().getTestClass().getRealClass().getSimpleName();
+
         // Generate a unique ID for the current test thread to help filter logs
         String testId = UUID.randomUUID().toString().split("-")[0];
         ThreadContext.put(TEST_ID, testId);
 
         // Register the test in the Extent Report
-        ExtentTest test = extentReports.createTest(
-                result.getMethod().getTestClass().getRealClass().getSimpleName()
-                        + " / " + result.getMethod().getMethodName());
+        ExtentTest test = extentReports.createTest(methodName).assignCategory(className);
 
         extentTestThread.set(test);
         extentTestThread.get().log(Status.INFO, "Test ID: " + ThreadContext.get(TEST_ID));
 
-        logger.info("Test started: {}/{}",
-                result.getMethod().getTestClass().getRealClass().getSimpleName(),
-                result.getMethod().getMethodName());
+        logger.info("Test started: {}/{}", className, methodName);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        extentTestThread.get().log(Status.PASS, "Test passed: " + result.getMethod().getMethodName());
-        logger.info("Test passed: {}/{}",
-                result.getMethod().getTestClass().getRealClass().getSimpleName(),
-                result.getMethod().getMethodName());
+        String methodName = result.getMethod().getMethodName();
+        String className = result.getMethod().getTestClass().getRealClass().getSimpleName();
+
+        extentTestThread.get().log(Status.PASS, "Test passed: " + methodName);
+        logger.info("Test passed: {}/{}", className, methodName);
 
         // Reset log context to global ID
         ThreadContext.put(TEST_ID, DEFAULT_LOG_CONTEXT);
@@ -120,12 +120,13 @@ public class ExtentReportListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        logger.error("Test failed: {}/{}",
-                result.getMethod().getTestClass().getRealClass().getSimpleName(),
-                result.getMethod().getMethodName());
+        String methodName = result.getMethod().getMethodName();
+        String className = result.getMethod().getTestClass().getRealClass().getSimpleName();
+
+        logger.error("Test failed: {}/{}", className, methodName);
 
         ExtentTest currentTest = extentTestThread.get();
-        currentTest.log(Status.FAIL, "Test failed: " + result.getMethod().getMethodName());
+        currentTest.log(Status.FAIL, "Test failed: " + methodName);
         currentTest.log(Status.FAIL, result.getThrowable().getMessage());
         currentTest.log(Status.FAIL, result.getThrowable());
 
@@ -134,7 +135,7 @@ public class ExtentReportListener implements ITestListener, ISuiteListener {
         Page page = (factory != null) ? factory.getPage() : null;
 
         if (page != null) {
-            String screenshotPath = ScreenshotUtils.takeScreenshot(page, result.getMethod().getMethodName());
+            String screenshotPath = ScreenshotUtils.takeScreenshot(page, methodName);
             if (screenshotPath != null) {
                 currentTest.fail("Screenshot: ",
                         MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
@@ -150,11 +151,12 @@ public class ExtentReportListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        extentTestThread.get().log(Status.SKIP, "Test skipped: " + result.getMethod().getMethodName());
+        String methodName = result.getMethod().getMethodName();
+        String className = result.getMethod().getTestClass().getRealClass().getSimpleName();
+
+        extentTestThread.get().log(Status.SKIP, "Test skipped: " + methodName);
         extentTestThread.get().log(Status.INFO, result.getThrowable());
-        logger.warn("Test skipped: {}/{}",
-                result.getMethod().getTestClass().getRealClass().getSimpleName(),
-                result.getMethod().getMethodName());
+        logger.warn("Test skipped: {}/{}", className, methodName);
         ThreadContext.put(TEST_ID, DEFAULT_LOG_CONTEXT);
     }
 
