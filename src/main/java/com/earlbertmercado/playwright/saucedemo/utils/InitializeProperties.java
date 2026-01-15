@@ -7,7 +7,6 @@ import java.util.Properties;
 public final class InitializeProperties {
 
     private InitializeProperties() {
-        // Prevent instantiation
     }
 
     public static Properties loadProperties() {

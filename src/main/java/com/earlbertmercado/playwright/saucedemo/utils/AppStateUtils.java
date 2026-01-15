@@ -48,9 +48,4 @@ public class AppStateUtils {
         resetAppState();
         logout();
     }
-
-//    public LoginPage logoutAndReturnLoginPage() {
-//        logout();
-//        return new LoginPage(page);
-//    }
 }

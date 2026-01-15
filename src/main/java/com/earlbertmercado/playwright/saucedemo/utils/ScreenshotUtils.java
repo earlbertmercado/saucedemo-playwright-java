@@ -2,6 +2,8 @@ package com.earlbertmercado.playwright.saucedemo.utils;
 
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.ScreenshotType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,9 +13,11 @@ import java.time.format.DateTimeFormatter;
 
 public class ScreenshotUtils {
 
+    private static final Logger logger = LogManager.getLogger(AppStateUtils.class);
+
     public static String takeScreenshot(Page page, String scenarioName) {
         if (page == null) {
-            System.err.println("Page instance is null. Cannot take screenshot.");
+            logger.error("Page instance is null. Cannot take screenshot.");
             return null;
         }
         String screenshotDir = System.getProperty("user.dir") + "/reports/screenshots/";
@@ -22,7 +26,7 @@ public class ScreenshotUtils {
         try {
             Files.createDirectories(screenshotDirPath); // Creates directories if they don't exist
         } catch (Exception e) {
-            System.err.println("Failed to create screenshot directory: " + e.getMessage());
+            logger.error("Failed to create screenshot directory: {}", e.getMessage());
             return null;
         }
 
@@ -44,11 +48,11 @@ public class ScreenshotUtils {
 
             String relativePathForReport = "./screenshots/" + filename; // Path relative to the HTML report
 
-            System.out.println("Screenshot saved to: " + fullPath);
-            System.out.println("Path for report: " + relativePathForReport);
+            logger.info("Screenshot saved to: {}", fullPath);
+            logger.info("Path for report: {}", relativePathForReport);
             return relativePathForReport;
         } catch (Exception e) {
-            System.err.println("Failed to take screenshot: " + e.getMessage());
+            logger.error("Failed to take screenshot: {}", e.getMessage());
             return null;
         }
     }
